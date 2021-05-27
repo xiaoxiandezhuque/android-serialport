@@ -1,0 +1,20 @@
+/**
+ * 全局统一配置
+ */
+ext {
+
+    /**
+     * 版本统一管理
+     */
+    applicationId = "com.xh.test"
+    versionCode = 1
+    versionName = "1.0.0"
+
+    compileSdkVersion = 29
+    minSdkVersion = 21
+    targetSdkVersion = 29
+
+    kotlin_version = "1.4.0"
+
+
+}
