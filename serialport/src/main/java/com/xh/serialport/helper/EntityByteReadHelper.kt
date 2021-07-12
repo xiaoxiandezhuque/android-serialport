@@ -6,7 +6,7 @@ import java.util.*
 
 class EntityByteReadHelper(allocateByteSize: Int) :
     ByteReadHelper {
-    private val bytes = ByteArray(allocateByteSize)
+    private val bytes = ByteArray(allocateByteSize shr 1)
     private val byteBuffer = ByteBuffer.allocate(allocateByteSize)
     private lateinit var inputStream: InputStream
 

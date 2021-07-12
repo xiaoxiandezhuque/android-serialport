@@ -11,16 +11,8 @@ import java.util.*
 class ReflectiveType<T>(val clazz: Class<T>) {
 
     val boundFieldList = mutableListOf<BoundFieldImpl>()
-    var typeField: TypeField? = null
+    var typeFieldList = mutableListOf<TypeField>()
 
-    fun checkType(typeStr: String): Boolean {
-        if (typeField != null) {
-            if (typeStr != typeField!!.typeHexString) {
-                return false
-            }
-        }
-        return true
-    }
 
     fun getVariableBoundField(name: String): BoundFieldImpl {
         for (bean in boundFieldList) {
@@ -63,7 +55,12 @@ class ReflectiveType<T>(val clazz: Class<T>) {
                     resultCallback.boundFieldList.add(boundField)
                     val typeCompare = fields[i].getAnnotation(TypeCompare::class.java)
                     if (typeCompare != null) {
-                        resultCallback.typeField = TypeField(typeCompare.hexString, boundField)
+                        resultCallback.typeFieldList.add(
+                            TypeField(
+                                typeCompare.hexString,
+                                boundField
+                            )
+                        )
                     }
                 }
             }

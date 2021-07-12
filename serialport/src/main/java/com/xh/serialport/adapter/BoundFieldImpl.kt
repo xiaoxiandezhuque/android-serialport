@@ -69,10 +69,14 @@ class BoundFieldImpl(
                 byteReadHelper.getBytes(fieldLength)
             }
         //检查是不是当前类型
-        if (reflectiveType.typeField?.boundField == this &&
-            !reflectiveType.checkType(ConvertUtils.bytes2HexString(byteArray))
-        ) {
-            throw  TypeCheckException()
+        for (bean in reflectiveType.typeFieldList) {
+            if (bean.boundField == this) {
+                if (bean.typeHexString != ConvertUtils.bytes2HexString(byteArray)) {
+                    throw  TypeCheckException()
+                } else {
+                    break
+                }
+            }
         }
         typeAdapter.read(byteArray)?.also {
             field.isAccessible = true
